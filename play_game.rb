@@ -17,6 +17,7 @@ puts
 while true
 #Player 1 turn
 p1.player_turn(board)
+
 board.take_turn(p1.number,p1)
 board.check_for_win(p1)
 
