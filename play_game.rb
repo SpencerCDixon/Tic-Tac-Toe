@@ -4,9 +4,9 @@ require './player.rb'
 board = Gameboard.new
 
 #Get player names and set them accordingly
-print "Player One's Name: "
+print "Player One's Name (X): "
 player_1_name = gets.chomp
-print "Player Two's Name: "
+print "Player Two's Name (O): "
 player_2_name = gets.chomp
 p1 = Player.new(player_1_name)
 p1.id = 'X'
@@ -17,7 +17,6 @@ puts
 while true
 #Player 1 turn
 p1.player_turn(board)
-
 board.take_turn(p1.number,p1)
 board.check_for_win(p1)
 

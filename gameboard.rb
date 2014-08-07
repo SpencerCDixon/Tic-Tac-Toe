@@ -20,7 +20,7 @@ class Gameboard
     end
     cells
   end
-
+  # Break up all cell win combinations in order to check for win
   def a_cells
     a_cells = gameboard.slice(0..2)
     a_cells
@@ -92,7 +92,6 @@ class Gameboard
       mark = 'O'
     end
     new_number = number.to_i - 1
-
     until gameboard[new_number].default_mark == '-'
       puts "Someone has already gone there."
       print "Please pick a new number: "
@@ -100,7 +99,6 @@ class Gameboard
       new_number = num - 1
     end
     gameboard[new_number].default_mark = mark
-
   end
 
   def check_for_win(player)
@@ -112,13 +110,18 @@ class Gameboard
     if f_cells.all? {|mark| mark.default_mark.include?('X')} || f_cells.all? {|mark| mark.default_mark.include?('O')} then win(player) end
     if g_cells.all? {|mark| mark.default_mark.include?('X')} || g_cells.all? {|mark| mark.default_mark.include?('O')} then win(player) end
     if h_cells.all? {|mark| mark.default_mark.include?('X')} || h_cells.all? {|mark| mark.default_mark.include?('O')} then win(player) end
+    if gameboard.all? {|cell| cell.default_mark != '-'} then tie end
   end
 
   def win(player)
-    puts
     puts
     puts "#{player.name.capitalize} Wins!"
     exit
   end
 
+  def tie
+    puts
+    puts "Tie Game."
+    exit
+  end
 end
